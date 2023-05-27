@@ -5,14 +5,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to detect cycle in an undirected graph.
-    
-    
-    
-    
-    
-    
-    
+
     bool t=false;
     bool dfs(vector<int>&x,vector<int> adj[],int i,int p)
     {
@@ -61,8 +54,6 @@ class Solution {
         
     }
 };
-
-//{ Driver Code Starts.
 int main() {
     int tc;
     cin >> tc;
