@@ -12,46 +12,52 @@ class Solution {
     
     
     
-    bool isCycle(int V, vector<int> adj[]) {
-        // Code here
-        vector<int>x(V,0);
-        queue<int>q;
+    
+    bool t=false;
+    bool dfs(vector<int>&x,vector<int> adj[],int i,int p)
+    {
+       // cout<<i<<p<<endl;
+        if(x[i]!=0)
+            return true;
         
-        
-        
-        for(int j=0;j<V;j++)
+        x[i]=1;
+        for(auto j:adj[i])
         {
-            if(x[j]!=0)continue;
-            q.push(j);
-            x[j]=1;
-            while(!q.empty())
+           // cout<<j<<x[j]<<endl;
+            if(j==p) continue;
+           // cout<<j<<x[j]<<endl;
+            if(j==i ||x[j]==1)
             {
-                int a=q.front();
-                x[a]=2;
-                q.pop();
-                for(auto i:adj[a])
-                {
-                    if(x[i]==1 || i==a)
-                    {
-                        return true;
-                    }
-                    if(x[i]==2)
-                    {
-                        continue;
-                    }
-                    if(x[i]==0)
-                    {
-                        x[i]=1;
-                        q.push(i);
-                    }
-                    
-                    
-                }
+                return true;
+            }
+                        //cout<<j<<x[j]<<endl;
+
+            if(x[j]==0)
+            {
+               // cout<<"hello"<<endl;
+                t= dfs(x,adj,j,i);
             }
         }
+        return t;
+    }
+    
+    
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
         
-        
-        return false;
+         vector<int>x(V,0);
+         
+         for(int i=0;i<V;i++)
+         {
+             if(x[i]==0)
+             {
+                 bool p=dfs(x,adj,i,-1);
+                // cout<<p<<endl;
+                 if(p==true)
+                 return true;
+             }
+         }
+         return false;
         
     }
 };
