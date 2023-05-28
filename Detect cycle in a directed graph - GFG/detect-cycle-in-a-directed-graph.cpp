@@ -6,37 +6,28 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in a directed graph.
-    bool p=false;
-    bool cycle(vector<int> adj[], int visited[], int lv[], int node)
+    
+    bool x=false;
+    bool dfs(vector<int>adj[],int visited[],int lv[], int node)
     {
-        
-       // cout<<node<<endl;
         lv[node]=1;
         visited[node]=1;
         for(auto i:adj[node])
         {
-           // cout<<"i"<<i<<visited[i]<<lv[i]<<endl;
             if(i==node) return true;
-            else if(lv[i]==1 && visited[i]==1)
+            else if(visited[i]==1 && lv[i]==1)
             {
-              //  cout<<"hello"<<node<<endl;
                 return true;
             }
             else if(visited[i]==0)
             {
-                //cout<<"sdsf";
-                p= cycle(adj,visited, lv,i);
+                x=dfs(adj,visited,lv,i);
             }
-            
             
         }
         lv[node]=0;
-        return p;
+        return x;
     }
-    
-    
-    
-    
     
     bool isCyclic(int V, vector<int> adj[]) {
         // code here
@@ -46,12 +37,13 @@ class Solution {
         {
             if(visited[i]==0)
             {
-               /// cout<<"A"<<endl;
-                bool t=cycle(adj,visited, lv,i);
-                if(t==true) return true;
+                bool t=dfs(adj, visited, lv,i);
+                if(t)return t;
             }
         }
         return false;
+        
+        
     }
 };
 
