@@ -12,10 +12,7 @@ class Solution {
     void dfs(vector<int>adj[],unordered_map<int,int>&x,int index)
     {
         
-        if(x[index]==1)
-        {
-            return;
-        }
+        
         t.push_back(index);
         x[index]=1;
         for(auto j:adj[index])
@@ -25,6 +22,7 @@ class Solution {
                 dfs(adj,x,j);
             }
         }
+        return;
         
     }
     
