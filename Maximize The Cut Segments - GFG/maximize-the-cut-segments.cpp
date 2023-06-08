@@ -31,21 +31,38 @@ class Solution
         return dp[n];
     }
     
-    
-    
-    
-    
-    
     //Function to find the maximum number of cuts.
     int maximizeTheCuts(int n, int x, int y, int z)
     {
-        vector<int>dp(n+1,-1);
-        int t= soln(n,x,y,z,dp);
-        if(t<0)
+        vector<int>dp(n+1,INT_MIN);
+        
+        dp[0]=0;
+        for(int i=1;i<=n;i++)
+        {
+            int a,b,c;
+            a=b=c=INT_MIN;
+            if(i-x>=0 && dp[i-x]!=INT_MIN)
+            {
+                a=1+dp[i-x];
+            }
+            if(i-y>=0 && dp[i-y]!=INT_MIN)
+            {
+                b=1+dp[i-y];
+            }
+            if(i-z>=0 && dp[i-z]!=INT_MIN)
+            {
+                c=1+dp[i-z];
+            }
+            dp[i]=max({a,b,c});
+            
+        }
+        
+        // int t= soln(n,x,y,z,dp);
+        if(dp[n]<0)
         {
             return 0;
         }
-        return t;
+        return dp[n];
     }
 };
 
