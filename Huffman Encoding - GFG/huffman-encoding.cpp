@@ -3,10 +3,8 @@
 using namespace std;
 
 // } Driver Code Ends
-class Solution
-{
-	public:
-	class node
+
+class node
 	{
 	    public:
 	    int val;
@@ -27,7 +25,15 @@ class Solution
 	        return a->val > b->val;
 	    }
 	};
+
+class Solution
+{
+	public:
 	
+	
+// 	bool cmp(node *a, node *b){
+// 	    return a->val > b->val;
+// 	}
 	
 	    void preorder(vector<string>&ans,node *temp, string s)
 	    {
