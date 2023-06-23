@@ -7,56 +7,55 @@ class Solution
 {
 	public:
 	//Function to return list containing vertices in Topological order. 
-	
-	void calc(vector<int>adj[],int n,vector<int>&ind)
-	{
-	    for(int i=0;i<n;i++)
-	    {
-	        for(auto j:adj[i])
-	        {
-	            ind[j]++;
-	        }
-	    }
-	}
-	
-	
-	
-	
+	void calc(vector<int>adj[], int v, vector<int>&ind)
+    {
+        for(int i=0;i<v;i++)
+        {
+            for(auto j:adj[i])
+            {
+                ind[j]++;
+            }
+        }
+    }
 	
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
 	    vector<int>ind(V,0);
-	    calc(adj,V,ind);
-	    queue<int>q;
-	    vector<int>ans;
-	    bool visit[V]={0};
-	    for(int i=0;i<V;i++)
-	    {
-	        if(ind[i]==0)
-	        {
-	            q.push(i);
-	            visit[i]=1;
-	            ans.push_back(i);
-	        }
-	    }
-	    while(!q.empty())
-	    {
-	        int t=q.front();
-	        q.pop();
-	        for(auto j:adj[t])
-	        {
-	            ind[j]--;
-	            if(ind[j]==0)
-	            {
-	                q.push(j);
-	                ans.push_back(j);
-	            }
-	        }
-	    }
+        calc(adj,V,ind);
+        vector<int>ans;
+        queue<int>q;
+        vector<int>visited(V,0);
+        int count=0;
+        for(int i=0;i<V;i++)
+        {
+            if(ind[i]==0)
+            {
+                q.push(i);
+                visited[i]=1;
+                count++;
+            }
+        }
+        
+        while(!q.empty())
+        {
+            int temp=q.front();
+            q.pop();
+            ans.push_back(temp);
+            for(auto j:adj[temp])
+            {
+                ind[j]--;
+                if(ind[j]==0)
+                {
+                    q.push(j);
+                    count++;
+                    visited[j]=1;
+                }
+            }
+            
+        }
+        return ans;
 	    
-	    return ans;
-	 
 	}
 };
 
