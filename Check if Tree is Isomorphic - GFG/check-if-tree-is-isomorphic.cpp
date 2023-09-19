@@ -104,37 +104,18 @@ class Solution{
     bool isIsomorphic(Node *root1,Node *root2)
     {
     //add code here.
-        if((root1==NULL && root2!=NULL) || (root1!=NULL && root2==NULL) )
-        {
-            return false;
-        }
-        if(root1==NULL and root2==NULL)
-        {
-            return true;
-        }
-        if(root1->data!= root2->data)
-        {
-            return false;
-        }
+        if((root1==NULL && root2!=NULL) || (root1!=NULL && root2==NULL) ) return false;
         
+        if(root1==NULL and root2==NULL) return true;
+        
+        if(root1->data!= root2->data)  return false;
         
         bool x=isIsomorphic(root1->left,root2->left)+isIsomorphic(root1->left,root2->right);
-        
         bool y=isIsomorphic(root1->right,root2->left)+isIsomorphic(root1->right,root2->right);
-        // if(root1->left!=NULL && root1->left->data && root2->left!=NULL && root2->left->data )
-        // {
-        //     x=isIsomorphic(root1->left,root1->left);
-        // }
-        // if(root1->left!=NULL &&root1->left->data && root2->right!=NULL && root2->right->data)
-        // {
-        //     y=isIsomorphic(root1->left,root1->right);
-        // }
-        
+      
         return x&y;
-    
-    
-    
-    
+
+
     }
 };
 
